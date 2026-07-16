@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaitali | Full Stack Developer & Data Analyst</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4A6BFF;
+            --primary-purple: #8A2BE2;
+            --blue-light: #E8F0FF;
+            --blue-medium: #6B8CFF;
+            --purple-light: #F3E8FF;
+            --purple-medium: #A855F7;
+            --dark-text: #1E293B;
+            --medium-text: #475569;
+            --light-text: #64748B;
+            --light-bg: #FFFFFF;
+            --light-card: #F8FAFF;
+            --gradient-blue-purple: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
+            --gradient-purple-blue: linear-gradient(135deg, var(--primary-purple), var(--primary-blue));
+            --shadow: 0 8px 25px rgba(74, 107, 255, 0.12);
+            --shadow-hover: 0 15px 35px rgba(74, 107, 255, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-text);
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 4px;
+            background: var(--gradient-blue-purple);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            animation: widthPulse 2s infinite;
+        }
+        
+        @keyframes widthPulse {
+            0%, 100% { width: 70px; }
+            50% { width: 100px; }
+        }
+        
+        /* Navigation - Enhanced */
+        .navbar {
+            background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(248,250,255,0.98));
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow);
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid var(--blue-light);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            background: var(--gradient-blue-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            animation: gradientFlow 3s ease infinite;
+            background-size: 200% 200%;
+        }
+        
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .nav-profile-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid var(--primary-blue);
+            animation: borderPulse 3s infinite;
+        }
+        
+        @keyframes borderPulse {
+            0%, 100% { border-color: var(--primary-blue); }
+            50% { border-color: var(--primary-purple); }
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            margin: 0 5px;
+            color: var(--medium-text) !important;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-purple) !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-blue-purple);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            padding: 150px 0 100px;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--blue-light) 0%, var(--purple-light) 100%);
+        }
+        
+        /* Floating Bubbles */
+        .bubbles-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(74, 107, 255, 0.08);
+            animation: floatBubble 20s infinite linear;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+            animation-duration: 25s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 5s;
+            animation-duration: 30s;
+            background: rgba(138, 43, 226, 0.08);
+        }
+        
+        .bubble:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 10s;
+            animation-duration: 35s;
+            background: rgba(74, 107, 255, 0.08);
+        }
+        
+        .bubble:nth-child(4) {
+            width: 90px;
+            height: 90px;
+            top: 30%;
+            right: 25%;
+            animation-delay: 15s;
+            background: rgba(138, 43, 226, 0.08);
+        }
+        
+        @keyframes floatBubble {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(50px, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(-50px, 50px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            background: var(--gradient-blue-purple);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .dynamic-text-container {
+            height: 70px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .dynamic-text {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            position: relative;
+        }
+        
+        .dynamic-text::before {
+            content: "Full Stack Developer";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: var(--primary-purple);
+            overflow: hidden;
+            animation: textFlip 8s infinite;
+        }
+        
+        @keyframes textFlip {
+            0%, 40% {
+                height: 0;
+            }
+            50%, 90% {
+                height: 100%;
+            }
+            100% {
+                height: 0;
+            }
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--medium-text);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-image {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 10px solid transparent;
+            background: linear-gradient(45deg, var(--primary-blue), var(--primary-purple)) border-box;
+            box-shadow: var(--shadow);
+            animation: floatCircle 6s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+        
+        @keyframes floatCircle {
+            0%, 100% { 
+                transform: translateY(0);
+            }
+            50% { 
+                transform: translateY(-20px);
+            }
+        }
+        
+        .btn-primary {
+            background: var(--gradient-blue-purple);
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 50px;
+            color: white;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+            animation: buttonPulse 2s infinite;
+        }
+        
+        @keyframes buttonPulse {
+            0%, 100% { 
+                box-shadow: 0 5px 15px rgba(74, 107, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 0 5px 25px rgba(74, 107, 255, 0.5);
+            }
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(74, 107, 255, 0.4);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--primary-purple);
+            color: var(--primary-purple);
+            padding: 10px 28px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary-purple);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .bg-light-section {
+            background-color: var(--light-card);
+        }
+        
+        /* About Section */
+        .about-section {
+            background-color: var(--light-card);
+        }
+        
+        .about-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+        
+        .about-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--blue-light);
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .about-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-blue-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+        }
+        
+        .about-card:hover .about-icon {
+            transform: scale(1.1);
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 25px;
+        }
+        
+        .skill-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid var(--blue-light);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-blue-purple);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2);
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-text);
+        }
+        
+        /* Colorful Skill Icons */
+        .html-icon { color: #E34F26; }
+        .css-icon { color: #1572B6; }
+        .js-icon { color: #F7DF1E; }
+        .react-icon { color: #61DAFB; }
+        .node-icon { color: #339933; }
+        .python-icon { color: #3776AB; }
+        .sql-icon { color: #4479A1; }
+        .powerbi-icon { color: #F2C811; }
+        .tableau-icon { color: #E97627; }
+        .git-icon { color: #F05032; }
+        .mongodb-icon { color: #47A248; }
+        .aws-icon { color: #FF9800; }
+        
+        /* Project Cards */
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--blue-light);
+            height: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-blue-purple);
+        }
+        
+        .project-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.5s;
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+        
+        .project-content {
+            padding: 20px;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+        
+        .project-tag {
+            background: rgba(74, 107, 255, 0.1);
+            color: var(--primary-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(74, 107, 255, 0.2);
+        }
+        
+        /* Certifications - Clickable */
+        .cert-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid var(--blue-light);
+            height: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cert-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-blue-purple);
+        }
+        
+        .cert-content {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .cert-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        
+        .view-cert-btn {
+            margin-top: 15px;
+            background: var(--gradient-blue-purple);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .view-cert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Internship Section */
+        .internship-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid var(--blue-light);
+            height: 100%;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+        
+        .internship-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+        
+        .internship-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-blue-purple);
+        }
+        
+        .internship-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .internship-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-blue-purple);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .internship-date {
+            color: var(--primary-blue);
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Resume Section */
+        .resume-section {
+            background: var(--gradient-blue-purple);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .resume-section h2 {
+            color: white;
+        }
+        
+        .resume-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-resume {
+            background: white;
+            color: var(--primary-purple);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+        }
+        
+        .btn-resume:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Contact Section */
+        .contact-form .form-control {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid var(--blue-light);
+            margin-bottom: 20px;
+            background: white;
+            color: var(--dark-text);
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .contact-form .form-control:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 0.2rem rgba(74, 107, 255, 0.15);
+            outline: none;
+        }
+        
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--blue-light);
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-blue-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(74, 107, 255, 0.15);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gradient-blue-purple);
+            color: white;
+            padding: 50px 0 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-link {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: white;
+            color: var(--primary-purple);
+            transform: scale(1.1);
+        }
+        
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .chatbot-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-blue-purple);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: botFloat 3s ease-in-out infinite;
+        }
+        
+        @keyframes botFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .chatbot-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .chatbot-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-window {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow-hover);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--blue-light);
+            overflow: hidden;
+            z-index: 1002;
+            width: 90%;
+            max-width: 400px;
+            max-height: 80vh;
+            animation: chatSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes chatSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .chatbot-header {
+            background: var(--gradient-blue-purple);
+            color: white;
+            padding: 15px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+        
+        .chatbot-close:hover {
+            transform: rotate(90deg);
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 300px;
+        }
+        
+        .message {
+            padding: 10px 15px;
+            border-radius: 15px;
+            max-width: 80%;
+            word-wrap: break-word;
+            animation: messageAppear 0.3s ease-out;
+        }
+        
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .bot-message {
+            background: rgba(74, 107, 255, 0.1);
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            border-left: 3px solid var(--primary-blue);
+        }
+        
+        .user-message {
+            background: rgba(138, 43, 226, 0.1);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+            border-right: 3px solid var(--primary-purple);
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid var(--blue-light);
+            background: #F8F9FF;
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid var(--blue-light);
+            border-radius: 25px;
+            background: white;
+            color: var(--dark-text);
+            outline: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .chatbot-input input:focus {
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 10px rgba(74, 107, 255, 0.2);
+        }
+        
+        .chatbot-input button {
+            background: var(--gradient-blue-purple);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .chatbot-input button:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Modal for Certificate View */
+        .cert-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cert-modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 90%;
+            max-height: 90%;
+            overflow: auto;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .cert-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--dark-text);
+            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cert-modal-close:hover {
+            background: var(--primary-purple);
+            color: white;
+        }
+        
+        .cert-modal-img {
+            width: 100%;
+            height: auto;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 120px 0 80px;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+                text-align: center;
+            }
+            
+            .dynamic-text {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            
+            .hero-description {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .profile-image {
+                width: 250px;
+                height: 250px;
+                margin-top: 30px;
+            }
+            
+            /* Mobile: image on top, text below */
+            .row.align-items-center {
+                display: flex;
+                flex-direction: column-reverse;
+            }
+            
+            .col-lg-6.text-center {
+                margin-bottom: 30px;
+            }
+            
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+                gap: 20px;
+            }
+            
+            .about-cards-grid {
+                gap: 20px;
+            }
+            
+            .btn-primary, .btn-outline-primary {
+                padding: 10px 20px;
+                font-size: 0.95rem;
+            }
+            
+            .hero-buttons {
+                text-align: center;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .dynamic-text {
+                font-size: 1.4rem;
+            }
+            
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .skills-container {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 15px;
+            }
+            
+            .about-cards-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .resume-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-resume {
+                width: 80%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="" 
+                     alt="Profile" 
+                     class="nav-profile-img">
+                Chaitali
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#internship">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#projects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#certifications">Certifications</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#resume">Resume</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <!-- Floating Bubbles -->
+        <div class="bubbles-container">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-1 order-"1>
+                    <div class="hero-content">
+                        <h1>Chaitali Waware</h1>
+                        <div class="dynamic-text-container">
+                            <div class="dynamic-text">Full Stack Developer</div>
+                        </div>
+                        <p class="hero-description">
+                            I create beautiful, functional websites and applications with modern technologies. 
+                            Passionate about data analysis, clean code, user experience, and solving complex problems. 
+                            Let's build something amazing together!
+                        </p>
+                        <div class="hero-buttons">
+                            <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                            <a href="#projects" class="btn btn-outline-primary ms-3">View My Work</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center order-lg-2 order-2">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" 
+                         alt="Profile Image" 
+                         class="profile-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3>Hello! I'm Chaitali</h3>
+                    <p>I'm a passionate full-stack developer and data analyst with 3+ years of experience creating web applications and extracting insights from data. I specialize in React, Node.js, Python, and modern data visualization tools.</p>
+                    <p>My journey started during my computer science degree, and I've been constantly learning and growing ever since. I enjoy turning complex problems into simple, beautiful solutions.</p>
+                    <p>As a problem solver, I thrive on challenges and love finding innovative solutions to technical problems. When I'm not coding or analyzing data, you can find me hiking, reading tech blogs, or exploring new coffee shops.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-cards-grid">
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <h5>Web Development</h5>
+                            <p class="text-muted">Building modern, responsive web applications</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h5>Data Analysis</h5>
+                            <p class="text-muted">Extracting insights from complex datasets</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <h5>Problem Solving</h5>
+                            <p class="text-muted">Finding innovative technical solutions</p>
+                        </div>
+                        <div class="about-card">
+                            <div class="about-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h5>Team Collaboration</h5>
+                            <p class="text-muted">Working effectively in team environments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="skills-container">
+                <div class="skill-card">
+                    <div class="skill-icon html-icon">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <div class="skill-name">HTML5</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon css-icon">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <div class="skill-name">CSS3</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon js-icon">
+                        <i class="fab fa-js-square"></i>
+                    </div>
+                    <div class="skill-name">JavaScript</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon react-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="skill-name">React.js</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon node-icon">
+                        <i class="fab fa-node-js"></i>
+                    </div>
+                    <div class="skill-name">Node.js</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon python-icon">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <div class="skill-name">Python</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon sql-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="skill-name">SQL</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon powerbi-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="skill-name">Power BI</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon tableau-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="skill-name">Tableau</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon git-icon">
+                        <i class="fab fa-git-alt"></i>
+                    </div>
+                    <div class="skill-name">Git</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon mongodb-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="skill-name">MongoDB</div>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon aws-icon">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <div class="skill-name">AWS</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internship/Work Section -->
+    <section id="internship" class="bg-light-section">
+        <div class="container">
+            <h2 class="section-title">Work & Internship Experience</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="internship-card">
+                        <div class="internship-header">
+                            <div class="internship-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-0">Full Stack Developer Intern</h4>
+                                <p class="text-muted mb-0">Tech Solutions Inc.</p>
+                            </div>
+                        </div>
+                        <div class="internship-date">
+                            <i class="far fa-calendar-alt me-2"></i>June 2023 - Dec 2023
+                        </div>
+                        <ul class="mt-3">
+                            <li>Developed responsive web applications using React.js and Node.js</li>
+                            <li>Collaborated with cross-functional teams to deliver 5+ client projects</li>
+                            <li>Implemented RESTful APIs and integrated MongoDB databases</li>
+                            <li>Reduced page load time by 40% through code optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="internship-card">
+                        <div class="internship-header">
+                            <div class="internship-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-0">Data Analyst Intern</h4>
+                                <p class="text-muted mb-0">Digital Innovations LLC</p>
+                            </div>
+                        </div>
+                        <div class="internship-date">
+                            <i class="far fa-calendar-alt me-2"></i>Jan 2024 - June 2024
+                        </div>
+                        <ul class="mt-3">
+                            <li>Analyzed large datasets using Python Pandas and SQL to extract business insights</li>
+                            <li>Created interactive dashboards in Power BI and Tableau for stakeholders</li>
+                            <li>Improved data processing efficiency by 35% through query optimization</li>
+                            <li>Presented findings to management leading to 20% cost reduction</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="row">
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="project-img" 
+                             alt="E-commerce Website">
+                        <div class="project-content">
+                            <h4>E-commerce Platform</h4>
+                            <p>A full-featured e-commerce website with user authentication, product catalog, shopping cart, and orders.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Node.js</span>
+                                <span class="project-tag">MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="project-img" 
+                             alt="Data Dashboard">
+                        <div class="project-content">
+                            <h4>Sales Data Dashboard</h4>
+                            <p>Interactive data visualization dashboard for analyzing sales performance with real-time metrics.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Power BI</span>
+                                <span class="project-tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="project-card">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" 
+                             class="project-img" 
+                             alt="Task Management App">
+                        <div class="project-content">
+                            <h4>Task Management App</h4>
+                            <p>A productivity application for managing tasks with drag-and-drop functionality and team collaboration.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">React</span>
+                                <span class="project-tag">Firebase</span>
+                                <span class="project-tag">CSS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section - Clickable -->
+    <section id="certifications" class="bg-light-section">
+        <div class="container">
+            <h2 class="section-title">Certifications</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="cert-card" onclick="viewCertificate('Full Stack Web Development - Coursera')">
+                        <div class="cert-content">
+                            <div class="cert-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4>Full Stack Web Development</h4>
+                            <p class="text-muted">Coursera | 2023</p>
+                            <p>Comprehensive full-stack development program covering frontend and backend technologies.</p>
+                            <button class="view-cert-btn">View Certificate →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="cert-card" onclick="viewCertificate('Data Analysis with Python - IBM')">
+                        <div class="cert-content">
+                            <div class="cert-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4>Data Analysis with Python</h4>
+                            <p class="text-muted">IBM | 2022</p>
+                            <p>Data analysis using Python, Pandas, NumPy, and data visualization libraries.</p>
+                            <button class="view-cert-btn">View Certificate →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="cert-card" onclick="viewCertificate('React Developer - Meta')">
+                        <div class="cert-content">
+                            <div class="cert-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4>React Developer Certification</h4>
+                            <p class="text-muted">Meta | 2022</p>
+                            <p>React.js development including hooks, context API, and advanced patterns.</p>
+                            <button class="view-cert-btn">View Certificate →</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="cert-card" onclick="viewCertificate('SQL for Data Science - UC Davis')">
+                        <div class="cert-content">
+                            <div class="cert-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h4>SQL for Data Science</h4>
+                            <p class="text-muted">University of California | 2021</p>
+                            <p>SQL for data science applications and database management.</p>
+                            <button class="view-cert-btn">View Certificate →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume-section">
+        <div class="container">
+            <h2 class="section-title" style="color: white;">My Resume</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px;">Download my resume to learn more about my experience and qualifications</p>
+            <div class="resume-buttons">
+                <button class="btn-resume" onclick="viewResume()">
+                    <i class="fas fa-eye"></i> View Resume
+                </button>
+                <button class="btn-resume" onclick="downloadResume()">
+                    <i class="fas fa-download"></i> Download Resume
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="bg-light-section">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="contact-info">
+                        <h4 class="mb-4">Contact Information</h4>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h6>Email</h6>
+                                <p>chaitaliwaware2023@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h6>Phone</h6>
+                                <p>+91 8624819626</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h6>Location</h6>
+                                <p>Pune, Maharashtra</p>
+                            </div>
+                        </div>
+                        <div class="social-links mt-5">
+                            <a href="https://www.linkedin.com/in/chaitali07/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://github.com/ChaitaliWaware74" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://www.instagram.com/chaituu_7406/" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/chaitali07/" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://github.com/ChaitaliWaware74" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/chaituu_7406/" class="social-link"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-center mb-3">© 2026 Chaitali Waware. All rights reserved.</p>
+            <p class="text-center">Designed with <i class="fas fa-heart"></i> by Chaitali</p>
+        </div>
+    </footer>
+
+    <!-- Certificate Modal -->
+    <div id="certModal" class="cert-modal">
+        <div class="cert-modal-content">
+            <div class="cert-modal-close" onclick="closeCertModal()">&times;</div>
+            <h3 id="certTitle" style="margin-bottom: 20px;">Certificate</h3>
+            <div id="certPreview" style="text-align: center; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white;">
+                <i class="fas fa-certificate" style="font-size: 80px; margin-bottom: 20px;"></i>
+                <h3>Certificate of Completion</h3>
+                <p>This certifies that</p>
+                <h2>Chaitali Waware</h2>
+                <p>has successfully completed the course</p>
+                <h4 id="certCourseName">Course Name</h4>
+                <p style="margin-top: 30px;">Date: 2024</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Overlay -->
+    <div class="chatbot-overlay" id="chatbotOverlay">
+        <div class="chatbot-window">
+            <div class="chatbot-header">
+                <span>Chaitali's Assistant</span>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm Chaitali's AI assistant. How can I help you today?
+                </div>
+                <div class="message bot-message">
+                    You can ask me about Chaitali's skills, projects, experience, or how to contact her.
+                </div>
+            </div>
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chatbot Button -->
+    <div class="chatbot-container">
+        <button class="chatbot-btn" id="chatbotToggle">
+            <i class="fas fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Certificate Modal Functions
+        function viewCertificate(certName) {
+            const modal = document.getElementById('certModal');
+            const certCourseName = document.getElementById('certCourseName');
+            certCourseName.textContent = certName;
+            modal.style.display = 'flex';
+        }
+        
+        function closeCertModal() {
+            document.getElementById('certModal').style.display = 'none';
+        }
+        
+        // Resume Functions
+        function viewResume() {
+            window.open('#', '_blank');
+            alert('Resume preview would open here. In production, this would show your actual resume PDF.');
+        }
+        
+        function downloadResume() {
+            alert('Resume download would start here. In production, this would download your actual resume PDF file.');
+        }
+        
+        // Chatbot functionality
+        const chatbotToggle = document.getElementById('chatbotToggle');
+        const chatbotOverlay = document.getElementById('chatbotOverlay');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        
+        chatbotToggle.addEventListener('click', () => {
+            chatbotOverlay.style.display = 'flex';
+            chatbotInput.focus();
+        });
+        
+        chatbotClose.addEventListener('click', () => {
+            chatbotOverlay.style.display = 'none';
+        });
+        
+        chatbotOverlay.addEventListener('click', (e) => {
+            if (e.target === chatbotOverlay) {
+                chatbotOverlay.style.display = 'none';
+            }
+        });
+        
+        const chatbotResponses = {
+            greetings: ["Hello!", "Hi there!", "Greetings!", "Hey! How can I help?"],
+            skills: "Chaitali has skills in Full Stack Development (HTML, CSS, JavaScript, React, Node.js) and Data Analysis (Python, SQL, Power BI, Tableau).",
+            projects: "Chaitali has worked on E-commerce platforms, Data Dashboards, Task Management apps, and more. Check the projects section for details.",
+            experience: "Chaitali has 3+ years of experience in web development and data analysis, with internships at Tech Solutions Inc. and Digital Innovations LLC.",
+            contact: "You can contact Chaitali via email: chaitaliwaware2023@gmail.com or phone: +91 8624819626. Use the contact form for direct messages.",
+            about: "Chaitali is a passionate full-stack developer and data analyst with expertise in modern web technologies and data visualization tools.",
+            resume: "You can view or download Chaitali's resume from the Resume section above.",
+            hire: "Chaitali is available for freelance projects and full-time opportunities. Contact her via email to discuss potential collaborations.",
+            default: "I'm not sure about that. You can ask about Chaitali's skills, projects, experience, or how to contact her."
+        };
+        
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (!message) return;
+            
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+            
+            setTimeout(() => {
+                let response = getBotResponse(message);
+                addMessage(response, 'bot');
+            }, 500);
+        }
+        
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        function getBotResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            
+            if (message.includes('hi') || message.includes('hello') || message.includes('hey')) {
+                return chatbotResponses.greetings[Math.floor(Math.random() * chatbotResponses.greetings.length)];
+            } else if (message.includes('skill')) {
+                return chatbotResponses.skills;
+            } else if (message.includes('project')) {
+                return chatbotResponses.projects;
+            } else if (message.includes('experience') || message.includes('work')) {
+                return chatbotResponses.experience;
+            } else if (message.includes('about') || message.includes('who')) {
+                return chatbotResponses.about;
+            } else if (message.includes('resume') || message.includes('cv')) {
+                return chatbotResponses.resume;
+            } else if (message.includes('hire') || message.includes('job')) {
+                return chatbotResponses.hire;
+            } else if (message.includes('contact') || message.includes('email') || message.includes('phone')) {
+                return chatbotResponses.contact;
+            } else {
+                return chatbotResponses.default;
+            }
+        }
+        
+        chatbotSend.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (chatbotOverlay.style.display === 'flex') {
+                    chatbotOverlay.style.display = 'none';
+                }
+                if (document.getElementById('certModal').style.display === 'flex') {
+                    document.getElementById('certModal').style.display = 'none';
+                }
+            }
+        });
+        
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            const modal = document.getElementById('certModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
